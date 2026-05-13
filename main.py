@@ -1,8 +1,13 @@
-from software.services.pdf_service import extract_text
+import sys
 
-pdf_path = "docs/teste.pdf"
+from PySide6.QtWidgets import QApplication
 
-text = extract_text(pdf_path)
+from software.ui.main_window import MainWindow
 
-print(text)
- 
+
+app = QApplication(sys.argv)
+
+window = MainWindow()
+window.show()
+
+app.exec()
