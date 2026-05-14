@@ -15,11 +15,11 @@ class MainWindow(QWidget):
     def __init__(self):
         super().__init__()
 
-        self.setWindowTitle("JurisReader")
+        self.setWindowTitle("Juris_Reader")
         self.resize(800, 600)
 
         self.button = QPushButton("Abrir PDF")
-        self.summary_button = QPushButton("Gerar Resumo")  #Button create to generate summary of the text extracted from the pdf file
+        self.summary_button = QPushButton("Gerar Resumo do Processo")  #Button create to generate summary of the text extracted from the pdf file
 
         self.text_area = QTextEdit()
 
