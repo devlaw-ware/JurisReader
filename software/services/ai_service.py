@@ -21,4 +21,4 @@ def summarize_text(text):
         ]
     )
 
-    return response['message']['content']
+    return response['message']['content'] 

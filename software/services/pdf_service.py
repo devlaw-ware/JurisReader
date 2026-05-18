@@ -8,6 +8,6 @@ def extract_text(pdf_path):
     for page in doc:
         text += page.get_text()
 
-    return text
+        return text
 
 #Fitz is a lib of python, that we use tdo extract text from pdf files
