@@ -1,7 +1,8 @@
 import sys
 
-from PySide6.QtWidgets import QApplication
+from PySide6.QtWidgets import QApplication, QProgressBar
 from software.ui.main_window import MainWindow
+
 
 app = QApplication(sys.argv)
 window = MainWindow()
