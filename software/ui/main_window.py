@@ -6,9 +6,41 @@ from PySide6.QtWidgets import (
     QFileDialog
 )
 
+from PySide6.QtCore import (
+    QThread, Signal
+)
+
 from software.services.extraction_service import extract_dates, extract_values
 from software.services.pdf_service import extract_text
 from software.services.ai_service import summarize_text 
+
+
+class SummaryThread(QThread):
+
+    finished = Signal(str)
+
+    def __init__(self, text):
+
+        super().__init__()
+
+        self.text = text
+
+    def run(self):
+
+        summary = summarize_text(self.text)
+
+        self.finished.emit(summary)
+        
+def generate_summary(self):
+
+    if hasattr(self, 'current_text'):
+
+        self.thread = SummaryThread(self.current_text)
+
+        self.thread.finished.connect(self.show_summary)
+
+        self.thread.start()
+
 
 
 class MainWindow(QWidget):
