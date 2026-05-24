@@ -16,12 +16,14 @@ from PySide6.QtCore import (
 
 from software.services.extraction_service import (
     extract_dates,
-    extract_values
+    extract_values,
+    extract_process_number
 )
 
 from software.services.pdf_service import extract_text
 
 from software.services.ai_service import summarize_text
+
 
 
 class SummaryThread(QThread):
@@ -90,7 +92,7 @@ class MainWindow(QWidget):
         )
 
     def open_pdf(self):
-
+        
         file_path, _ = QFileDialog.getOpenFileName(
             self,
             "Selecionar PDF",
@@ -101,6 +103,8 @@ class MainWindow(QWidget):
         if file_path:
 
             text = extract_text(file_path)
+            
+            process_numbers = extract_process_number(text)
 
             self.current_text = text
 
@@ -111,6 +115,10 @@ class MainWindow(QWidget):
             values = extract_values(text)
 
             info_text = f"""
+NÚMERO DO PROCESSO:
+
+{'\n'.join(process_numbers)}
+
 DATAS:
 
 {'\n'.join(dates)}
