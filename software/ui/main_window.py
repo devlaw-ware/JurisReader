@@ -5,7 +5,7 @@ from PySide6.QtWidgets import (
     QVBoxLayout,
     QFileDialog,
     QLabel,
-    QProgressBar
+    QProgressBar,
 )
 
 from PySide6.QtCore import (
@@ -17,13 +17,13 @@ from PySide6.QtCore import (
 from software.services.extraction_service import (
     extract_dates,
     extract_values,
-    extract_process_number
+    extract_process_number,
+    extract_parties
 )
 
 from software.services.pdf_service import extract_text
 
 from software.services.ai_service import summarize_text
-
 
 
 class SummaryThread(QThread):
@@ -66,8 +66,10 @@ class MainWindow(QWidget):
         self.progress_bar = QProgressBar()
 
         self.text_area = QTextEdit()
+        self.text_area.setReadOnly(True)
 
         self.info_area = QTextEdit()
+        self.info_area.setReadOnly(True)
 
         layout = QVBoxLayout()
 
@@ -105,6 +107,7 @@ class MainWindow(QWidget):
             text = extract_text(file_path)
             
             process_numbers = extract_process_number(text)
+            parties = extract_parties(text)
 
             self.current_text = text
 
@@ -118,6 +121,10 @@ class MainWindow(QWidget):
 NÚMERO DO PROCESSO:
 
 {'\n'.join(process_numbers)}
+
+PARTES:
+
+{'\n'.join(parties)}
 
 DATAS:
 
